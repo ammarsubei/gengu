@@ -10,10 +10,11 @@ DOXDIR 	:= ./doxy
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 HEADERS := $(shell find $(HDRDIR) -type f -name "*.$(HDREXT)")
 
-CFLAGS 	:= -g -Wall -std=c++11 -I$(HDRDIR)
+CFLAGS 	:= -g -Wall -std=c++11
+INCLUDE := -I$(HDRDIR) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -L. -lBox2D
 
 $(TARGET): $(SOURCES) $(HEADERS)
-	$(CXX) -o $@ $(SOURCES) $(CFLAGS)
+	$(CXX) -o $@ $(SOURCES) $(CFLAGS) $(INCLUDE)
 
 run:
 	./$(TARGET)
