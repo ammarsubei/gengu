@@ -12,7 +12,7 @@ void Game::run()
 {
   while ( window.isOpen() ) {
     events();
-    //update();
+    update();
     render();
   }
 }
@@ -24,12 +24,28 @@ void Game::events()
     if (event.type == sf::Event::Closed) {
       window.close();
     }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      const float mouseX = sf::Mouse::getPosition(window).x;
+      const float mouseY = sf::Mouse::getPosition(window).y;
+      world.spawnBody(mouseX, mouseY);
+    }
   }
+}
+
+void Game::update()
+{
+  world.step();
 }
 
 void Game::render()
 {
-  sf::Color background(100, 100, 100);
+  sf::Color background(0, 0, 0);
   window.clear(background);
+
+  for (auto body : world.getBodies()) {
+    window.draw(body.getShape());
+  }
+
   window.display();
 }
