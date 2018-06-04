@@ -22,7 +22,7 @@ run:
 all: clean $(TARGET) run
 
 doxygen:
-	doxygen $(DOXDIR)/doxy.config
+	doxygen $(DOXDIR)/doxyfile
 
 clean:
 	@echo "Clenaing..."
