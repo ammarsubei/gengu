@@ -1,7 +1,14 @@
+/**
+ *  @file Game class definitions
+ *
+ *  @author Ammar Subei
+ */
 
 #include "game.h"
+#include "staticBody.h"
+#include "dynamicBody.h"
 
-Game::Game()
+Game::Game(b2Vec2 grav) : world(grav)
 {
   window.create(sf::VideoMode::getDesktopMode(), "Gengu", sf::Style::Default);
   window.setFramerateLimit(60);
@@ -26,16 +33,20 @@ void Game::events()
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      const float mouseX = sf::Mouse::getPosition(window).x;
-      const float mouseY = sf::Mouse::getPosition(window).y;
-      world.spawnBody(mouseX, mouseY);
+      spawnBody(Body::Type::DYNAMIC);
+    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+      spawnBody(Body::Type::STATIC);
     }
   }
 }
 
 void Game::update()
 {
-  world.step();
+  world.Step(1 / 60.f, 8, 3);
+
+  for (auto body : bodies) {
+    body->update();
+  }
 }
 
 void Game::render()
@@ -43,9 +54,29 @@ void Game::render()
   sf::Color background(0, 0, 0);
   window.clear(background);
 
-  for (auto body : world.getBodies()) {
-    window.draw(body.getShape());
+  for (auto body : bodies) {
+    window.draw(body->getShape());
   }
 
   window.display();
+}
+
+void Game::spawnBody(Body::Type t)
+{
+  Body *newBody;
+  const float xPos = sf::Mouse::getPosition(window).x;
+  const float yPos = sf::Mouse::getPosition(window).y;
+
+  switch(t) {
+    case Body::Type::DYNAMIC:
+      newBody = new DynamicBody(xPos, yPos);
+      break;
+    case Body::Type::STATIC:
+      newBody = new StaticBody(xPos, yPos);
+      break;
+    default:
+      break;
+  }
+  newBody->createBody(world);
+  bodies.push_back(newBody);
 }
