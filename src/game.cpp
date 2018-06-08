@@ -14,11 +14,11 @@ sf::Texture Game::stat;
 Game::Game(b2Vec2 grav) : world(grav)
 {
   // Temporary textures and sizes
-  if (!dyno.loadFromFile("2.jpg", sf::IntRect(500,500,20,20))) {
+  if (!dyno.loadFromFile("imgs/2.jpg", sf::IntRect(500,500,20,20))) {
     exit(100);
   }
 
-  if (!stat.loadFromFile("2.jpg", sf::IntRect(20,50,800,100))) {
+  if (!stat.loadFromFile("imgs/2.jpg", sf::IntRect(20,50,800,100))) {
     exit(100);
   }
 
