@@ -11,6 +11,7 @@ StaticBody::StaticBody(const float x, const float y) : Body(x, y, Type::STATIC)
   // This size and shape is temporary for testing
   setSize(800, 100);
   shape = new sf::RectangleShape(size);
+
   shape->setOrigin(size.x / 2, size.y / 2);
   shape->setPosition(position);
 }
@@ -18,16 +19,14 @@ StaticBody::StaticBody(const float x, const float y) : Body(x, y, Type::STATIC)
 void StaticBody::createBody(b2World &world)
 {
   b2BodyDef bodyDef;
-
   bodyDef.type = b2_staticBody;
-
-  bodyDef.position.Set(position.x / scale, position.y / scale);
+  bodyDef.position.Set(position.x / Body::scale, position.y / Body::scale);
   body = world.CreateBody(&bodyDef);
 
   b2PolygonShape polygonShape;
   polygonShape.SetAsBox(
-      shape->getLocalBounds().width / 2 / scale,
-      shape->getLocalBounds().height / 2 / scale);
+      shape->getLocalBounds().width / 2 / Body::scale,
+      shape->getLocalBounds().height / 2 / Body::scale);
 
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &polygonShape;

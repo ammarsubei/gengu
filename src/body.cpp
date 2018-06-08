@@ -6,6 +6,8 @@
 
 #include "body.h"
 
+float Body::scale = 30.f;
+
 void Body::update()
 {
   shape->setPosition(body->GetPosition().x * scale, body->GetPosition().y * scale);

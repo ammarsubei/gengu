@@ -55,4 +55,7 @@ class Game
     b2World world;              ///< Game physics world
     sf::RenderWindow window;    ///< Game window instance
     std::vector<Body*> bodies;  ///< List of bodies in the game
+
+    static sf::Texture dyno;    ///< Texture for dynamic bodies
+    static sf::Texture stat;    ///< Texture for static bodies
 };

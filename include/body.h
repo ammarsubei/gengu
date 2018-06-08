@@ -32,6 +32,7 @@ class Body
      *  @brief Default constructor
      *  @param float x position
      *  @param float y position
+     *  @param Type body type
      */
     Body(const float xPos, const float yPos, Type t) : type(t), position(xPos, yPos) {}
 
@@ -103,12 +104,11 @@ class Body
     void update();
 
   protected:
-    Type type;                ///< Body type
-    b2Body *body;             ///< Box2D body (physics)
-    sf::Shape *shape;         ///< Body shape
-    sf::Texture texture;      ///< Body texture
-    sf::Vector2f size;        ///< Body size
-    sf::Vector2f position;    ///< Body position
+    Type type;              ///< Body type
+    b2Body *body;           ///< Box2D body (physics)
+    sf::Shape *shape;       ///< Body shape
+    sf::Vector2f size;      ///< Body size
+    sf::Vector2f position;  ///< Body position
 
-    const float scale = 30.f; ///< World scale
+    static float scale;     ///< World scale
 };
