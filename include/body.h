@@ -43,6 +43,18 @@ class Body
     Type getType()                            const { return type; }
 
     /**
+     *  @brief Getter for body density
+     *  @return float density of body
+     */
+    float getDensity()                        const { return density; }
+
+    /**
+     *  @brief Getter for body friction
+     *  @return float friction of body
+     */
+    float getFriction()                       const { return friction; }
+
+    /**
      *  @brief Getter for body shape
      *  @return sf::Shape shape of body
      */
@@ -65,6 +77,18 @@ class Body
      *  @param Type type of body
      */
     void setType(const Type value)                  { type = value; }
+
+    /**
+     *  @brief Setter for body density
+     *  @param float density of body
+     */
+    void setDensity(const float value)              { density = value; }
+
+    /**
+     *  @brief Setter for body friction
+     *  @param float friction of body
+     */
+    void setFriction(const float value)             { friction = value; }
 
     /**
      *  @brief Setter for body size
@@ -101,11 +125,13 @@ class Body
     /**
      *  @brief Updates body position, rotation, and state
      */
-    void update();
+    virtual void update();
 
   protected:
     Type type;              ///< Body type
     b2Body *body;           ///< Box2D body (physics)
+    float density;          ///< Body density
+    float friction;         ///< Body friction
     sf::Shape *shape;       ///< Body shape
     sf::Vector2f size;      ///< Body size
     sf::Vector2f position;  ///< Body position

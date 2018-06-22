@@ -6,10 +6,12 @@
 
 #include "staticBody.h"
 
-StaticBody::StaticBody(const float x, const float y) : Body(x, y, Type::STATIC)
+StaticBody::StaticBody(const float xPos, const float yPos) : Body(xPos, yPos, Type::STATIC)
 {
   // This size and shape is temporary for testing
   setSize(800, 100);
+  setDensity(0.f);
+  setFriction(1.f);
   shape = new sf::RectangleShape(size);
 
   shape->setOrigin(size.x / 2, size.y / 2);
@@ -30,7 +32,7 @@ void StaticBody::createBody(b2World &world)
 
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &polygonShape;
-  fixtureDef.density = 0.f;
-  fixtureDef.friction = 0.3f;
+  fixtureDef.density = getDensity();
+  fixtureDef.friction = getFriction();
   body->CreateFixture(&fixtureDef);
 }

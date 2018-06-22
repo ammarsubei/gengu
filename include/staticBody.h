@@ -13,8 +13,10 @@ class StaticBody : public Body
   public:
     /**
      *  @brief Default constructor
+     *  @param x position
+     *  @param y position
      */
-    StaticBody(const float x, const float y);
+    StaticBody(const float xPos, const float yPos);
 
     /**
      *  @brief Creates body in given game world

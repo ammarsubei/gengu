@@ -12,9 +12,6 @@
 #include "Box2D.h"
 #include "body.h"
 
-/**
- *  @brief Game class header file
- */
 class Game
 {
   public:

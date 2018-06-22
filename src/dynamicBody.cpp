@@ -6,10 +6,12 @@
 
 #include "dynamicBody.h"
 
-DynamicBody::DynamicBody(const float x, const float y) : Body(x, y, Type::DYNAMIC)
+DynamicBody::DynamicBody(const float xPos, const float yPos) : Body(xPos, yPos, Type::DYNAMIC)
 {
   // This size and shape is temporary for testing
-  setSize(20, 20);
+  setSize(40, 40);
+  setDensity(1.f);
+  setFriction(0.3f);
   shape = new sf::CircleShape(size.x / 2);
 
   shape->setOrigin(size.x / 2, size.y / 2);
@@ -28,7 +30,13 @@ void DynamicBody::createBody(b2World &world)
 
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &circle;
-  fixtureDef.density = 1.f;
-  fixtureDef.friction = 0.3f;
+  fixtureDef.density = getDensity();
+  fixtureDef.friction = getFriction();
   body->CreateFixture(&fixtureDef);
+}
+
+void DynamicBody::update()
+{
+  shape->setPosition(body->GetPosition().x * scale, body->GetPosition().y * scale);
+  shape->setRotation(body->GetAngle() * 180 / b2_pi);
 }
