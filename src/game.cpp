@@ -11,7 +11,7 @@
 sf::Texture Game::dyno;
 sf::Texture Game::stat;
 
-Game::Game(b2Vec2 grav) : world(grav)
+Game::Game()
 {
   // Temporary textures and sizes
   if (!dyno.loadFromFile("imgs/2.jpg", sf::IntRect(500,500,20,20))) {
@@ -98,6 +98,5 @@ void Game::spawnBody(Body::Type t)
       break;
   }
 
-  newBody->createBody(world);
   bodies.push_back(newBody);
 }

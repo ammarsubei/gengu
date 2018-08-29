@@ -18,23 +18,6 @@ DynamicBody::DynamicBody(const float xPos, const float yPos) : Body(xPos, yPos, 
   shape->setPosition(position);
 }
 
-void DynamicBody::createBody(b2World &world)
-{
-  b2BodyDef bodyDef;
-  bodyDef.type = b2_dynamicBody;
-  bodyDef.position.Set(position.x / Body::scale, position.y / Body::scale);
-  body = world.CreateBody(&bodyDef);
-
-  b2CircleShape circle;
-  circle.m_radius = shape->getLocalBounds().width / 2 / Body::scale;
-
-  b2FixtureDef fixtureDef;
-  fixtureDef.shape = &circle;
-  fixtureDef.density = getDensity();
-  fixtureDef.friction = getFriction();
-  body->CreateFixture(&fixtureDef);
-}
-
 void DynamicBody::update()
 {
   shape->setPosition(body->GetPosition().x * scale, body->GetPosition().y * scale);

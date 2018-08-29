@@ -7,7 +7,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Box2D.h"
 
 /**
  *  @brief Class for visualizing interactive bodies in the game
@@ -117,19 +116,12 @@ class Body
     void setPosition(const float x, const float y)  { position.x = x; position.y = y; }
 
     /**
-     *  @brief Creates body in given game world
-     *  @param b2World game world
-     */
-    virtual void createBody(b2World &world) = 0;
-
-    /**
      *  @brief Updates body position, rotation, and state
      */
     virtual void update();
 
   protected:
     Type type;              ///< Body type
-    b2Body *body;           ///< Box2D body (physics)
     float density;          ///< Body density
     float friction;         ///< Body friction
     sf::Shape *shape;       ///< Body shape

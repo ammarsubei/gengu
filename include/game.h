@@ -9,7 +9,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-#include "Box2D.h"
 #include "body.h"
 
 class Game
@@ -17,9 +16,8 @@ class Game
   public:
     /**
      *  @brief Default constructor
-     *  @param b2Vec2 gravity
      */
-    Game(b2Vec2 grav = b2Vec2(0.f, 10.f));
+    Game();
 
     /**
      *  @brief Runs game
@@ -49,7 +47,6 @@ class Game
     void spawnBody(Body::Type t);
 
   private:
-    b2World world;              ///< Game physics world
     sf::RenderWindow window;    ///< Game window instance
     std::vector<Body*> bodies;  ///< List of bodies in the game
 
